@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ignacio Borelli Solutions (IBS) | Software para gestión deportiva</title>
+<meta name="description" content="Software a medida. CDC – Control de Cancha: gestión integral para complejos deportivos, en Escritorio y Web.">
+<meta name="theme-color" content="#06141B">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06141B; --surface:#0C222C; --line:#1C3B49; --text:#E8F1F2; --muted:#8FA9B3;
+  --accent:#3DD9EB; --amber:#FFC247; --radius:18px;
+  --head:'Bricolage Grotesque',system-ui,sans-serif; --body:'Figtree',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{width:min(1100px,100% - 40px);margin-inline:auto}
+section{padding:72px 0}
+h1,h2,h3{font-family:var(--head);line-height:1.08;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,8vw,4.4rem);font-weight:800}
+h2{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:800;margin-bottom:12px}
+h3{font-size:1.35rem;font-weight:600}
+.lead{color:var(--muted);font-size:1.1rem;max-width:56ch}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:1px solid var(--line);transition:transform .15s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--accent);color:#04222A;border-color:var(--accent);box-shadow:0 0 28px rgba(61,217,235,.35)}
+.btn-primary:hover{box-shadow:0 0 38px rgba(61,217,235,.55)}
+.btn-ghost{background:transparent}
+.btn-ghost:hover{background:var(--surface)}
+
+/* Nav */
+header{position:sticky;top:0;z-index:10;background:rgba(6,20,27,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--head);font-weight:800;font-size:1.2rem;text-decoration:none}
+.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:.95rem}
+nav a:hover{color:var(--text)}
+@media(max-width:640px){nav a.hide-m{display:none}}
+
+/* Hero: líneas de cancha dibujadas al cargar (único movimiento de la página) */
+.hero{position:relative;overflow:hidden;padding:64px 0 80px}
+.court{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+.court *{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.4s ease-out forwards;opacity:.35}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero .wrap{position:relative;display:grid;gap:40px}
+.hero p.lead{margin:20px 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.05fr 1fr;align-items:center}}
+
+/* Contenedor de medios (mockup) */
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:0 0 60px rgba(61,217,235,.14)}
+.frame .bar{display:flex;gap:6px;padding:4px 6px 10px}
+.frame .bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.media{aspect-ratio:16/10;border-radius:12px;background:#08181F;display:grid;place-items:center;color:var(--muted);font-size:.9rem;overflow:hidden;text-align:center}
+.media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Productos */
+.grid{display:grid;gap:20px;margin-top:36px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.card.featured{border-color:rgba(61,217,235,.45);box-shadow:0 0 40px rgba(61,217,235,.1)}
+.card.soon{border-style:dashed;background:transparent;display:grid;place-content:center;text-align:center;color:var(--muted);min-height:200px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.badge{font-size:.8rem;font-weight:600;padding:4px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.badge.ok{color:#7CF0C0;border-color:rgba(124,240,192,.4)}
+.badge.beta{color:var(--amber);border-color:rgba(255,194,71,.4)}
+.card p{color:var(--muted);margin:10px 0 18px}
+.feat{list-style:none;padding:0;display:grid;gap:8px;margin-bottom:24px}
+.feat li{padding-left:26px;position:relative}
+.feat li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:7px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+@media(min-width:800px){.grid{grid-template-columns:1.6fr 1fr}}
+
+/* Galería */
+.shots{display:grid;gap:16px;margin-top:32px}
+@media(min-width:700px){.shots{grid-template-columns:repeat(3,1fr)}}
+.shot .media{aspect-ratio:9/16;max-height:420px}
+.shot .media.wide{aspect-ratio:16/10}
+.shot p{margin-top:8px;font-size:.92rem;color:var(--muted)}
+
+/* Sobre / contacto */
+.about{display:grid;gap:28px}
+@media(min-width:800px){.about{grid-template-columns:1fr 1fr;gap:56px}}
+.contact{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:40px 24px;text-align:center}
+.contact .lead{margin:8px auto 24px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+footer a{margin-left:16px;text-decoration:none}
+footer a:hover{color:var(--text)}
+@media(prefers-reduced-motion:reduce){.court *{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#inicio">IB<span>S</span></a>
+    <nav>
+      <a href="#productos">Aplicaciones</a>
+      <a class="hide-m" href="#capturas">Capturas</a>
+      <a class="hide-m" href="#sobre">Sobre IBS</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <svg class="court" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect x="80" y="60" width="840" height="480" rx="6"/>
+    <line x1="500" y1="60" x2="500" y2="540"/>
+    <circle cx="500" cy="300" r="90"/>
+    <rect x="80" y="170" width="150" height="260"/>
+    <rect x="770" y="170" width="150" height="260"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <h1>Software que hace que tu negocio funcione solo.</h1>
+      <p class="lead">Ignacio Borelli Solutions crea aplicaciones listas para usar. Empezá con CDC: reservas, caja y turnos de tu complejo deportivo en un solo lugar.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#productos">Ver CDC – Control de Cancha</a>
+        <a class="btn btn-ghost" href="#contacto">Hablar con IBS</a>
+      </div>
+    </div>
+    <!-- 👉 MEDIA HERO: reemplazá el texto de abajo por <img src="URL_IMAGEN"> o <video src="URL_VIDEO" autoplay muted loop playsinline></video> -->
+    <div class="frame">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="media">
+        <!-- <img src="img/cdc-hero.webp" alt="Panel principal de CDC" width="1280" height="800"> -->
+        Acá va la captura o video de CDC
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTOS ================= -->
+<section id="productos">
+  <div class="wrap">
+    <h2>Aplicaciones</h2>
+    <p class="lead">Cada producto es independiente: elegí el que resuelve tu problema.</p>
+
+    <div class="grid">
+
+      <!-- ====== INICIO BLOQUE DE APLICACIÓN (copiá desde acá hasta FIN para agregar otra) ====== -->
+      <article class="card featured">
+        <div class="badges">
+          <span class="badge ok">Disponible</span>
+          <span class="badge">Escritorio</span>
+          <span class="badge">Web</span>
+        </div>
+        <h3>CDC – Control de Cancha</h3>
+        <p>Sistema integral para gestionar complejos deportivos: de la reserva al cierre de caja.</p>
+        <ul class="feat">
+          <li>Agenda de turnos por cancha y por horario</li>
+          <li>Reservas, señas y cobros</li>
+          <li>Control de caja y reportes</li>
+          <li>Funciona en computadora y en el navegador</li>
+        </ul>
+        <div class="cta">
+          <!-- 👉 DESCARGA: pegá el enlace del archivo en GitHub Releases (ver guía) -->
+          <a class="btn btn-primary" href="https://github.com/TU_USUARIO/TU_REPO/releases/latest/download/CDC-Setup.exe" download>Descargar para Windows</a>
+          <!-- 👉 WEB: pegá la URL de tu app web -->
+          <a class="btn btn-ghost" href="https://TU-APP-WEB.web.app" target="_blank" rel="noopener">Abrir versión web</a>
+        </div>
+      </article>
+      <!-- ====== FIN BLOQUE DE APLICACIÓN ====== -->
+
+      <!-- Tarjeta "próximamente": cambiala por un bloque completo cuando la app salga de beta -->
+      <article class="card soon">
+        <span class="badge beta" style="justify-self:center">En desarrollo</span>
+        <h3 style="margin-top:12px">Próxima aplicación</h3>
+        <p style="margin-bottom:0">Delivery y gestión administrativa.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAPTURAS ================= -->
+<section id="capturas">
+  <div class="wrap">
+    <h2>CDC en acción</h2>
+    <p class="lead">Así se ve el sistema que usás todos los días.</p>
+    <div class="shots">
+      <!-- 👉 Cada .shot es una captura. Duplicá el bloque para sumar más -->
+      <figure class="shot">
+        <div class="media"><!-- <img src="img/captura-1.webp" alt="Agenda de turnos" loading="lazy"> -->Captura 1</div>
+        <p>Agenda de turnos</p>
+      </figure>
+      <figure class="shot">
+        <div class="media"><!-- <img src="img/captura-2.webp" alt="Control de caja" loading="lazy"> -->Captura 2</div>
+        <p>Control de caja</p>
+      </figure>
+      <figure class="shot">
+        <!-- 👉 Para video: <video src="img/demo.mp4" controls muted playsinline preload="none"></video> -->
+        <div class="media"><!-- <img src="img/captura-3.webp" alt="Reportes" loading="lazy"> -->Captura 3</div>
+        <p>Reportes</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SOBRE IBS ================= -->
+<section id="sobre">
+  <div class="wrap about">
+    <div>
+      <h2>Sobre IBS</h2>
+      <p class="lead">Ignacio Borelli Solutions desarrolla software práctico para negocios reales.</p>
+    </div>
+    <div>
+      <p class="lead">Diseñamos cada aplicación con el dueño del negocio en mente: simple de aprender, rápida de usar y con soporte directo del desarrollador. Sin intermediarios y sin vueltas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact">
+      <h2>¿Querés probar CDC o pedir soporte?</h2>
+      <p class="lead">Escribinos y te respondemos por email.</p>
+      <a class="btn btn-primary" href="mailto:ibsolutions28@gmail.com?subject=Consulta%20desde%20la%20web%20IBS">ibsolutions28@gmail.com</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y">2026</span> Ignacio Borelli Solutions (IBS). Todos los derechos reservados.</span>
+    <span>
+      Soporte por email
+      <!-- 👉 Redes: reemplazá # por tu enlace de Instagram -->
+      <a href="#" aria-label="Instagram de IBS">Instagram</a>
+    </span>
+  </div>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
