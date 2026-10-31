@@ -256,7 +256,7 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
-<script>document.getElementById('y').textContent=new Date().getFullYear()
+<script>document.getElementById('y').textContent=new Date().getFullYear();
 /* Moneda: sigue al mouse (izq-der, arriba-abajo) y vuelve sola al soltar */
 (function(){
   var stage=document.getElementById('stage'),coin=document.getElementById('coin');
@@ -269,8 +269,8 @@ footer a:hover{color:var(--text)}
   addEventListener('pointermove',function(e){
     if(e.pointerType==='mouse'){
       var b=stage.getBoundingClientRect();
-      ty=clamp((e.clientX-(b.left+b.width/2))/(innerWidth*.35))*165;
-      tx=-clamp((e.clientY-(b.top+b.height/2))/(innerHeight*.35))*140;
+      ty=clamp((e.clientX-(b.left+b.width/2))/(innerWidth*.5))*165;
+      tx=-clamp((e.clientY-(b.top+b.height/2))/(innerHeight*.5))*140;
       active=true;
     }else if(drag){ty+=(e.clientX-lx)*.8;lx=e.clientX;active=true;}
   });
