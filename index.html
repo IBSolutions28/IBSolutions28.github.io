@@ -363,7 +363,7 @@ footer a:hover{color:var(--text)}
 
 /* ENLACES REALES: pegá cada enlace entre las comillas cuando esté listo.
    Mientras estén vacíos, los botones llevan a la página "Próximamente" en lugar de mostrar un error 404. */
-var ENLACES={windows:'',web:'',manual:''};
+var ENLACES={windows:'',web:'',manual:'https://github.com/IBSolutions28/controldecancha-descargas/releases/latest/download/CDC-Manual.pdf'};
 document.querySelectorAll('a[data-enlace]').forEach(function(a){
   var u=ENLACES[a.dataset.enlace];if(!u)return;
   a.href=u;
